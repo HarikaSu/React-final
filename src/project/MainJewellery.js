@@ -191,13 +191,20 @@ const JewelleryCards = () => {
   const [jewellery, setJewellery] = useState([]);
   const [cart, setCart] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch("https://678f799a49875e5a1a9209c1.mockapi.io/jewellery/api/jewellery")
       .then((response) => response.json())
-      .then((data) => setJewellery(data))
-      .catch((error) => console.error("Error fetching data:", error));
+      .then((data) => {
+        setJewellery(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
   }, []);
 
   const addToCart = (item) => {
@@ -247,35 +254,42 @@ const JewelleryCards = () => {
           </div>
         </div>
         
-        {/* Jewellery Cards */}
-        <div className="row">
-          {jewellery.filter((item) => item.Product_Name.toLowerCase().includes(searchTerm.toLowerCase()))
-            .map((item) => (
-              <div key={item.id} className="col-md-4 mb-4">
-                <div className="card shadow-sm">
-                  <img
-                    src={item.Img_Url}
-                    className="card-img-top"
-                    alt={item.Product_Name}
-                    style={{ height: "400px", objectFit: "cover" }}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{item.Product_Name}</h5>
-                    <p className="card-text">
-                      <strong>Price:</strong> ${item.Price.USD}
-                    </p>
-                    <button className="btn btn-success" onClick={() => addToCart(item)}>
-                      Add to Cart
-                    </button>
+        {/* Loading Spinner */}
+        {loading ? (
+          <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        ) : (
+          <div className="row">
+            {jewellery.filter((item) => item.Product_Name.toLowerCase().includes(searchTerm.toLowerCase()))
+              .map((item) => (
+                <div key={item.id} className="col-md-4 mb-4">
+                  <div className="card shadow-sm">
+                    <img
+                      src={item.Img_Url}
+                      className="card-img-top"
+                      alt={item.Product_Name}
+                      style={{ height: "400px", objectFit: "cover" }}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{item.Product_Name}</h5>
+                      <p className="card-text">
+                        <strong>Price:</strong> ${item.Price.USD}
+                      </p>
+                      <button className="btn btn-success" onClick={() => addToCart(item)}>
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 export default JewelleryCards;
-
