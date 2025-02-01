@@ -520,6 +520,9 @@ const JewelleryCards = () => {
                       <p className="card-text">
                         <strong>Price:</strong> ${item.Price.USD}
                       </p>
+                      <p className="card-text">
+                        <strong>Price:</strong>{item.Price.INR}
+                      </p>
                       <button className="btn btn-success" onClick={() => addToCart(item)}>
                         <FaShoppingCart className="me-2" /> Add to Cart
                       </button>
