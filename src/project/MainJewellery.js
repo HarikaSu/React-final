@@ -316,7 +316,8 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "./ptroutes";
 import { signOut } from "firebase/auth";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FaShoppingCart, FaGem, FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaHeart } from "react-icons/fa";
+import { FaShoppingCart, FaGem, FaFacebook, FaTwitter, FaInstagram, FaEnvelope, FaHeart, FaUser } from "react-icons/fa";
+
 
 const JewelleryCards = () => {
   const [jewellery, setJewellery] = useState([]);
@@ -387,17 +388,30 @@ const JewelleryCards = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`} id="navbarNav">
-          <div className="d-flex ms-auto justify-content-end w-100">
-            <button className="btn btn-outline-light w-25 mb-2" onClick={() => navigate("/cart", { state: { cart } })}>
-              <FaShoppingCart className="me-2" /> Cart ({cart.reduce((acc, item) => acc + item.quantity, 0)})
-            </button>
-            <button className="btn btn-outline-light w-25 mb-2 ms-2" onClick={() => navigate("/wishlist", { state: { wishlist } })}>
-              <FaHeart className="me-2" /> Wishlist ({wishlist.length})
-            </button>
-            <button className="btn btn-outline-light w-25 mb-2 ms-2" onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
+          
+          {/* <div className="d-flex ms-auto justify-content-end w-100">
+  <button className="btn btn-outline-light w-auto px-3 mb-2" onClick={() => navigate("/cart", { state: { cart } })}>
+    <FaShoppingCart className="me-2" /> Cart ({cart.reduce((acc, item) => acc + item.quantity, 0)})
+  </button>
+  <button className="btn btn-outline-light w-auto px-3 mb-2 ms-2" onClick={() => navigate("/wishlist", { state: { wishlist } })}>
+    <FaHeart className="me-2" /> Wishlist ({wishlist.length})
+  </button>
+  <button className="btn btn-outline-light w-auto px-3 mb-2 ms-2" onClick={handleLogout}>
+    Logout
+  </button>
+</div> */}
+<div className="d-flex ms-auto justify-content-end w-100">
+  <button className="btn btn-outline-light w-auto px-3 mb-2" onClick={() => navigate("/cart", { state: { cart } })}>
+    <FaShoppingCart className="me-2" /> Cart ({cart.reduce((acc, item) => acc + item.quantity, 0)})
+  </button>
+  <button className="btn btn-outline-light w-auto px-3 mb-2 ms-2" onClick={() => navigate("/wishlist", { state: { wishlist } })}>
+    <FaHeart className="me-2" /> Wishlist ({wishlist.length})
+  </button>
+  <button className="btn btn-outline-light w-auto px-3 mb-2 ms-2" onClick={handleLogout}>
+    <FaUser className="me-2" /> Logout
+  </button>
+</div>
+
         </div>
       </nav>
 
@@ -440,7 +454,7 @@ const JewelleryCards = () => {
                         <strong>Price:</strong> ${item.Price.USD}
                       </p>
                       <p className="card-text">
-                        <strong>Price:</strong>₹{item.Price.INR}
+                        <strong>Price:</strong> ₹{item.Price.INR}
                       </p>
                       <button className="btn btn-success w-100 mb-2" onClick={() => addToCart(item)}>
                         <FaShoppingCart className="me-2" /> Add to Cart
