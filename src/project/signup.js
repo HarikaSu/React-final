@@ -152,7 +152,7 @@
 
 // export default Signup;
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword,  } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "./ptroutes";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
