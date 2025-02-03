@@ -65,7 +65,7 @@ const CartPage = () => {
         </ul>
       )}
       <h4>Total: ₹{calculateTotal()}</h4>
-      <button className="btn btn-primary mt-3" onClick={() => navigate("/")}>
+      <button className="btn btn-primary mt-3" onClick={() => navigate("/home")}>
         Continues Shopping
       </button>
     </div>
