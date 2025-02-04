@@ -20,7 +20,7 @@ const PrivateRoute = () => {
     return <p>Loading...</p>;
   }
 
-  return user ? <Outlet /> : <Navigate to="/signup" />;
+  return user ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
