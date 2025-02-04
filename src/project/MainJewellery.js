@@ -60,7 +60,7 @@ const JewelleryCards = () => {
   return (
     <div>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4 py-3">
+      {/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4 py-3">
         <span className="navbar-brand fw-bold fs-4">
           <FaGem className="me-2" /> Bhavii Jeweller's
         </span>
@@ -91,7 +91,48 @@ const JewelleryCards = () => {
             </li>
           </ul>
         </div>
-      </nav>
+      </nav> */}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4 py-3">
+  <span className="navbar-brand fw-bold fs-4">
+    <FaGem className="me-2" /> Bhavii Jeweller's
+  </span>
+
+  {/* Navbar Toggle Button */}
+  <button
+    className="navbar-toggler"
+    type="button"
+    onClick={() => setIsMenuOpen(!isMenuOpen)}
+    aria-expanded={isMenuOpen ? "true" : "false"}
+  >
+    <FaBars className="text-light" />
+  </button>
+
+  {/* Collapsible Menu */}
+  <div className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`}>
+    <ul className="navbar-nav ms-auto d-lg-flex align-items-center">
+      
+      {/* Wrap buttons inside div and add spacing for mobile */}
+      <div className="d-flex flex-column flex-lg-row mt-3 mt-lg-0 gap-3">
+        <li className="nav-item">
+          <button className="btn btn-outline-light w-auto px-3 me-3" onClick={() => { navigate("/cart", { state: { cart } }); setIsMenuOpen(false); }}>
+            <FaShoppingCart className="me-2" /> Cart ({cart.reduce((acc, item) => acc + item.quantity, 0)})
+          </button>
+        </li>
+        <li className="nav-item">
+          <button className="btn btn-outline-light w-auto px-3 me-3" onClick={() => { navigate("/wishlist", { state: { wishlist } }); setIsMenuOpen(false); }}>
+            <FaHeart className="me-2" /> Wishlist ({wishlist.length})
+          </button>
+        </li>
+        <li className="nav-item">
+          <button className="btn btn-outline-light w-auto px-3" onClick={handleLogout}>
+            <FaUser className="me-2" /> Logout
+          </button>
+        </li>
+      </div>
+    </ul>
+  </div>
+</nav>
+
 
       {/* Search Bar */}
       <div className="container mt-4">
