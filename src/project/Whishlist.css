@@ -112,4 +112,126 @@
       padding: 6px;
     }
   }
-  
+  .wishlist-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.wishlist-card {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.wishlist-header h2 {
+  margin-bottom: 15px;
+}
+
+.wishlist-body {
+  padding: 10px;
+}
+
+.wishlist-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.wishlist-item-info {
+  display: flex;
+  align-items: center;
+}
+
+.wishlist-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.wishlist-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.wishlist-remove-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.wishlist-remove-btn:hover {
+  background-color: #c82333;
+}
+
+.empty-wishlist-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-wishlist-img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 15px;
+}
+
+.empty-wishlist-message {
+  font-size: 18px;
+  color: #6c757d;
+  margin-bottom: 15px;
+}
+
+.wishlist-continue-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.wishlist-continue-btn:hover {
+  background-color: #dc3545;
+}
+
+@media (max-width: 600px) {
+  .wishlist-card {
+    max-width: 90%;
+  }
+
+  .wishlist-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .wishlist-item-info {
+    flex-direction: column;
+  }
+
+  .wishlist-img {
+    margin-bottom: 5px;
+  }
+}

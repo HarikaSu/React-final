@@ -190,4 +190,146 @@
       width: 40%;
     }
   }
+  .cart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+  }
+  
+  .cart-card {
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .cart-header h2 {
+    margin-bottom: 15px;
+  }
+  
+  .cart-body {
+    padding: 10px;
+  }
+  
+  .cart-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-item-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cart-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  
+  .cart-item-name {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .cart-item-controls {
+    display: flex;
+    align-items: center;
+  }
+  
+  .quantity-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px;
+  }
+  
+  .quantity-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .cart-quantity {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+  
+  .cart-total {
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .empty-cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .empty-cart-img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  .empty-cart-message {
+    font-size: 18px;
+    color: #6c757d;
+    margin-bottom: 15px;
+  }
+  
+  .cart-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .cart-btn:hover {
+    background-color: #218838;
+  }
+  
+  @media (max-width: 600px) {
+    .cart-card {
+      max-width: 90%;
+    }
+  
+    .cart-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .cart-item-info {
+      flex-direction: column;
+    }
+  
+    .cart-item-img {
+      margin-bottom: 5px;
+    }
+  }
+  
   

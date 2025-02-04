@@ -140,6 +140,63 @@
 // };
 
 // export default WishlistPage;
+// import React, { useEffect } from "react";
+// import { useLocation, useNavigate } from "react-router-dom";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "./Whishlist.css";
+
+// const WishlistPage = () => {
+//   const location = useLocation();
+//   const navigate = useNavigate();
+//   const [wishlist, setWishlist] = React.useState(location.state?.wishlist || []);
+
+//   useEffect(() => {
+//     document.title = "Your Wishlist";
+//   }, []);
+
+//   const removeFromWishlist = (id) => {
+//     setWishlist(wishlist.filter((item) => item.id !== id));
+//   };
+
+//   return (
+    
+//     <div className="wishlist-container">
+//       <div className="wishlist-card">
+//         <div className="wishlist-header">
+//           <h2>Your Wishlist</h2>
+//         </div>
+
+//         <div className="wishlist-body">
+//           {wishlist.length === 0 ? (
+//             <p className="empty-wishlist">Your wishlist is empty</p>
+//           ) : (
+//             <ul className="wishlist-list">
+//               {wishlist.map((item) => (
+//                 <li key={item.id} className="wishlist-item">
+//                   <div className="wishlist-item-info">
+//                     <img src={item.Img_Url} alt={item.Product_Name} className="wishlist-img" />
+//                     <span className="wishlist-name">{item.Product_Name}</span>
+//                   </div>
+//                   <button className="wishlist-remove-btn" onClick={() => removeFromWishlist(item.id)}>
+//                     Remove
+//                   </button>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+
+//           <div className="wishlist-footer">
+//             <button className="wishlist-continue-btn" onClick={() => navigate("/home")}> 
+//               Continue Shopping
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default WishlistPage;
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -159,7 +216,6 @@ const WishlistPage = () => {
   };
 
   return (
-    
     <div className="wishlist-container">
       <div className="wishlist-card">
         <div className="wishlist-header">
@@ -168,7 +224,13 @@ const WishlistPage = () => {
 
         <div className="wishlist-body">
           {wishlist.length === 0 ? (
-            <p className="empty-wishlist">Your wishlist is empty</p>
+            <div className="empty-wishlist-container">
+              <img src="https://chapenter.com/images/empty.gif" alt="Empty Wishlist" className="empty-wishlist-img" />
+              <p className="empty-wishlist-message">Your wishlist is empty! Start adding your favorite products now.</p>
+              <button className="wishlist-continue-btn" onClick={() => navigate("/home")}>
+                Continue Shopping
+              </button>
+            </div>
           ) : (
             <ul className="wishlist-list">
               {wishlist.map((item) => (
@@ -184,12 +246,6 @@ const WishlistPage = () => {
               ))}
             </ul>
           )}
-
-          <div className="wishlist-footer">
-            <button className="wishlist-continue-btn" onClick={() => navigate("/home")}> 
-              Continue Shopping
-            </button>
-          </div>
         </div>
       </div>
     </div>
@@ -197,6 +253,7 @@ const WishlistPage = () => {
 };
 
 export default WishlistPage;
+
 
 
 
