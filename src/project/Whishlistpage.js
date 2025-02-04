@@ -159,6 +159,7 @@ const WishlistPage = () => {
   };
 
   return (
+    
     <div className="wishlist-container">
       <div className="wishlist-card">
         <div className="wishlist-header">
