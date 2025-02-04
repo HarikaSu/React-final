@@ -1,87 +1,6 @@
-// import React, { useEffect } from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
-
-// const WishlistPage = () => {
-//   const location = useLocation();
-//   const navigate = useNavigate();
-//   const [wishlist, setWishlist] = React.useState(location.state?.wishlist || []);
-
-//   useEffect(() => {
-//     document.title = "Welcome to Your Wishlist";
-//   }, []);
-
-//   const removeFromWishlist = (id) => {
-//     setWishlist(wishlist.filter((item) => item.id !== id));
-//   };
-
-//   return (
-//     <div 
-//       className="container d-flex flex-column align-items-center justify-content-start min-vh-100 py-4 px-5" 
-//       style={{ backgroundColor: "white" }}
-//     >
-//       <div 
-//         className="card shadow-lg w-75 border-0" 
-//         style={{ backgroundColor: "white", border: "2px solid red" }}
-//       >
-//         <div 
-//           className="card-header text-danger text-center py-3" 
-//           style={{ backgroundColor: "white" }}
-//         >
-//           <h2 className="mb-0" style={{ color: "#FF4500" }}>Welcome to Your Wishlist</h2>
-//         </div>
-//         <div className="card-body">
-//           {wishlist.length === 0 ? (
-//             <p className="text-center" style={{ color: "#FF4500" }}>Your wishlist is empty</p>
-//           ) : (
-//             <ul className="list-group">
-//               {wishlist.map((item) => (
-//                 <li 
-//                   key={item.id} 
-//                   className="list-group-item d-flex justify-content-between align-items-center" 
-//                   style={{ border: "1px solid red", backgroundColor: "white" }}
-//                 >
-//                   <span>
-//                     <img
-//                       src={item.Img_Url}
-//                       alt={item.Product_Name}
-//                       style={{ width: "50px", height: "50px", marginRight: "10px", border: "2px solid red" }}
-//                     />
-//                     {item.Product_Name}
-//                   </span>
-//                   <div className="d-flex align-items-center">
-//                     <button
-//                       className="btn btn-sm"
-//                       style={{ 
-//                         backgroundColor: "white", 
-//                         color: "#FF4500", 
-//                         border: "1px solid #FF4500" 
-//                       }}
-//                       onClick={() => removeFromWishlist(item.id)}
-//                     >
-//                       Remove
-//                     </button>
-//                   </div>
-//                 </li>
-//               ))}
-//             </ul>
-//           )}
-//           <button 
-//   className="btn btn-sm mt-3 px-3 text-start" 
-//   style={{ backgroundColor: "#FF4500", color: "white", width: "auto" }} 
-//   onClick={() => navigate("/home")}
-// >
-//   Continue Shopping
-// </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default WishlistPage;
-// 
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const WishlistPage = () => {
   const location = useLocation();
@@ -97,11 +16,10 @@ const WishlistPage = () => {
   };
 
   return (
-    <div className="container d-flex flex-column align-items-center justify-content-start min-vh-100 py-4 px-3">
-      <div className="card shadow-lg w-100 w-md-75 w-lg-50 border-0" style={{ border: "2px solid red" }}>
-        
-        <div className="card-header text-center py-3" style={{ backgroundColor: "white" }}>
-          <h2 className="mb-0" style={{ color: "#FF4500", fontSize: "1.8rem" }}>Your Wishlist</h2>
+    <div className="wishlist-container container d-flex flex-column align-items-center justify-content-start min-vh-100 py-4 px-3">
+      <div className="wishlist-card card shadow-lg border-0">
+        <div className="card-header text-center py-3 bg-white">
+          <h2 className="wishlist-title">Your Wishlist</h2>
         </div>
 
         <div className="card-body">
@@ -110,41 +28,12 @@ const WishlistPage = () => {
           ) : (
             <ul className="list-group">
               {wishlist.map((item) => (
-                <li 
-                  key={item.id} 
-                  className="list-group-item d-flex flex-column flex-sm-row justify-content-between align-items-center p-3" 
-                  style={{ border: "1px solid red", backgroundColor: "white" }}
-                >
-                  {/* Product Info */}
-                  <div className="d-flex align-items-center flex-wrap text-center text-sm-start">
-                    <img
-                      src={item.Img_Url}
-                      alt={item.Product_Name}
-                      className="img-fluid rounded"
-                      style={{ 
-                        width: "60px", 
-                        height: "60px", 
-                        marginRight: "10px", 
-                        border: "2px solid red",
-                        objectFit: "cover"
-                      }}
-                    />
+                <li key={item.id} className="wishlist-item list-group-item d-flex flex-column flex-md-row justify-content-between align-items-center p-3">
+                  <div className="d-flex align-items-center flex-wrap text-center text-md-start">
+                    <img src={item.Img_Url} alt={item.Product_Name} className="wishlist-img img-fluid rounded" />
                     <span className="fw-bold fs-6">{item.Product_Name}</span>
                   </div>
-
-                  {/* Remove Button */}
-                  <button
-                    className="btn btn-sm mt-2 mt-sm-0"
-                    style={{ 
-                      backgroundColor: "white", 
-                      color: "#FF4500", 
-                      border: "1px solid #FF4500",
-                      transition: "0.3s ease-in-out"
-                    }}
-                    onClick={() => removeFromWishlist(item.id)}
-                    onMouseOver={(e) => e.target.style.backgroundColor = "#FF4500"}
-                    onMouseOut={(e) => e.target.style.backgroundColor = "white"}
-                  >
+                  <button className="wishlist-remove-btn btn btn-sm mt-2 mt-md-0" onClick={() => removeFromWishlist(item.id)}>
                     Remove
                   </button>
                 </li>
@@ -152,31 +41,107 @@ const WishlistPage = () => {
             </ul>
           )}
 
-          {/* Continue Shopping Button */}
           <div className="d-flex justify-content-center">
-            <button 
-              className="btn mt-3 px-4 py-2 fw-bold" 
-              style={{ 
-                backgroundColor: "#FF4500", 
-                color: "white", 
-                width: "100%", 
-                transition: "0.3s ease-in-out"
-              }} 
-              onClick={() => navigate("/home")}
-              onMouseOver={(e) => e.target.style.backgroundColor = "#D43F00"}
-              onMouseOut={(e) => e.target.style.backgroundColor = "#FF4500"}
-            >
+            <button className="wishlist-continue-btn btn mt-3 px-4 py-2 fw-bold" onClick={() => navigate("/home")}> 
               Continue Shopping
             </button>
           </div>
-
         </div>
       </div>
+      
+      <style>
+        {`
+          .wishlist-container {
+            max-width: 1200px;
+            margin: auto;
+          }
+          .wishlist-card {
+            width: 100%;
+            max-width: 600px;
+            border: 2px solid red;
+          }
+          .wishlist-title {
+            color: #FF4500;
+            font-size: 1.8rem;
+          }
+          .wishlist-item {
+            border: 1px solid red;
+            background-color: white;
+          }
+          .wishlist-img {
+            width: 60px;
+            height: 60px;
+            margin-right: 10px;
+            border: 2px solid red;
+            object-fit: cover;
+          }
+          .wishlist-remove-btn {
+            background-color: white;
+            color: #FF4500;
+            border: 1px solid #FF4500;
+            transition: 0.3s ease-in-out;
+            width: 25%;
+          }
+          .wishlist-remove-btn:hover {
+            background-color: #FF4500;
+            color: white;
+          }
+          .wishlist-continue-btn {
+            background-color: #FF4500;
+            color: white;
+            width: 50%;
+            transition: 0.3s ease-in-out;
+          }
+          .wishlist-continue-btn:hover {
+            background-color: #D43F00;
+          }
+          
+          @media (max-width: 768px) {
+            .wishlist-card {
+              max-width: 100%;
+              padding: 10px;
+            }
+            .wishlist-title {
+              font-size: 1.5rem;
+            }
+            .wishlist-img {
+              width: 50px;
+              height: 50px;
+            }
+            .wishlist-remove-btn {
+              width: 100%;
+            }
+            .wishlist-continue-btn {
+              width: 100%;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .wishlist-title {
+              font-size: 1.3rem;
+            }
+            .wishlist-img {
+              width: 40px;
+              height: 40px;
+            }
+            .wishlist-remove-btn {
+              font-size: 0.8rem;
+              padding: 5px 10px;
+            }
+            .wishlist-continue-btn {
+              font-size: 0.9rem;
+              padding: 8px;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
 
 export default WishlistPage;
+
+
 
 
 
