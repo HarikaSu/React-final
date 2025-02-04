@@ -192,5 +192,14 @@ button:hover {
 #pp a:hover {
     text-decoration: underline;
 }
-
+.guest-login{
+  display: flex;
+  justify-content: center;
+  width: 150px;
+  height: 50px;
+  margin-top: 12px;
+}
+.AlreadySignup{
+  color: white;
+}
   

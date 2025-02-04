@@ -238,20 +238,17 @@
 
 // export default Signup;
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInAnonymously } from "firebase/auth";
 import { auth } from "./ptroutes";
 import { useNavigate } from "react-router-dom";
 import "./signup.css";
 
 const Signup = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
-  
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -269,20 +266,30 @@ const Signup = () => {
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/login");
+      navigate("/home");
     } catch (error) {
       setError("Error signing up");
     }
   };
 
+  // const handleGuestLogin = async () => {
+  //   try {
+  //     await signInAnonymously(auth);
+  //     navigate("/home");
+  //   } catch (error) {
+  //     setError("Error signing in as guest");
+  //   }
+  // };
   const handleGuestLogin = async () => {
     try {
-      // await signInAnonymously(auth);
+      await signInAnonymously(auth);
       navigate("/home");
     } catch (error) {
-      setError("Error signing in as guest");
+      console.error("Guest login error:", error.message);
+      setError(error.message); // Display the exact error message
     }
   };
+  
 
   return (
     <div className="signup-container">
@@ -290,33 +297,16 @@ const Signup = () => {
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSignup}>
         <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
-        />
-        <input 
-          type="password" 
-          placeholder="Confirm Password" 
-          value={confirmPassword} 
-          onChange={(e) => setConfirmPassword(e.target.value)} 
-          required 
-        />
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
         <button type="submit">Signup</button>
       </form>
-      <button onClick={handleGuestLogin} className="guest-login" style={{ padding: '10px 20px', fontSize: '16px', marginTop: '10px', width: '400px'}}>Guest Login</button>
-      <p id="pp">Already have an account? <a href="/login">Login</a></p>
+      <button onClick={handleGuestLogin} className="guest-login">
+        Guest Login
+      </button>
+      <p className="AlreadySignup">Already have an account? <a href="/login">Login</a></p>
     </div>
   );
 };
 
 export default Signup;
-
-
-
-
-
-
-
