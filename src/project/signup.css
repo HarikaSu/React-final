@@ -98,6 +98,9 @@
     position: relative; /* So we can position the overlay */
     background: url("https://i.pinimg.com/originals/07/df/a1/07dfa16df91d03aa62037833eeee4470.jpg") no-repeat center center/cover;
 }
+.signup-container h2 {
+  color: white;
+}
 
 .signup-container::before {
     content: '';
@@ -116,7 +119,7 @@
 }
 
 h2 {
-    color: white;
+    color: rgb(238, 231, 231);
     font-size: 30px; /* Increased font size for emphasis */
     margin-bottom: 15px;
 }

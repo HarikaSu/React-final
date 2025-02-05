@@ -1,44 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./ptroutes";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import Signup from "./signup";
+import Login from "./login";
 import JewelleryCards from "./MainJewellery";
 import CartPage from "./CartPage";
 import WishlistPage from "./Whishlistpage";
-import Signup from "./signup";
-import Login from "./login";
 import PrivateRoute from "./PrivteRoutes";
 import AuthRoute from "./authPage";
 
 const JewelleryApp = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => {
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-
   return (
     <Router>
       <Routes>
-        {/* Auth Routes (Prevent access if logged in) */}
+        {/* Public Routes (Signup/Login) */}
         <Route element={<AuthRoute />}>
           <Route path="/" element={<Signup />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Route>
 
-        {/* Protected Routes (Prevent access if logged out) */}
+        {/* Protected Routes */}
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<JewelleryCards />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
         </Route>
+
+        {/* Redirect Unknown Routes to Login */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
   );

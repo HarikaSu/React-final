@@ -25,12 +25,13 @@
 // export default App;
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Signup from "./Signup";
+import Signup from "./signup";
 import Login from "./Login";
 import JewelleryCards from "./JewelleryCards";
 import { auth } from "./firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoute = ({ element }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -53,7 +54,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/" element={<Signup />} />
         <Route path="/jewellery" element={<PrivateRoute element={<JewelleryCards />} />} />
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>

@@ -158,6 +158,9 @@ button:hover {
     background: url("https://i.pinimg.com/originals/07/df/a1/07dfa16df91d03aa62037833eeee4470.jpg") no-repeat center center/cover;
     position: relative; /* So the overlay can be positioned */
 }
+.login-container h2{
+    color: white;
+}
 
 .login-container::before {
     content: '';
