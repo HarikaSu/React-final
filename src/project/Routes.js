@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./ptroutes";
 import JewelleryCards from "./MainJewellery";
@@ -8,23 +8,7 @@ import WishlistPage from "./Whishlistpage";
 import Signup from "./signup";
 import Login from "./login";
 import PrivateRoute from "./PrivteRoutes";
-
-const DisableBackButton = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname === "/home") {
-      window.history.pushState(null, null, window.location.href);
-      window.onpopstate = () => {
-        window.history.pushState(null, null, window.location.href);
-      };
-    } else {
-      window.onpopstate = null;
-    }
-  }, [location]);
-
-  return null;
-};
+import AuthRoute from "./authPage";
 
 const JewelleryApp = () => {
   const [loading, setLoading] = useState(true);
@@ -37,16 +21,19 @@ const JewelleryApp = () => {
     return () => unsubscribe();
   }, []);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading) return <p>Loading...</p>;
 
   return (
     <Router>
-      <DisableBackButton />
       <Routes>
-        <Route path="/" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
+        {/* Auth Routes (Prevent access if logged in) */}
+        <Route element={<AuthRoute />}>
+          <Route path="/" element={<Signup />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+        </Route>
+
+        {/* Protected Routes (Prevent access if logged out) */}
         <Route element={<PrivateRoute />}>
           <Route path="/home" element={<JewelleryCards />} />
           <Route path="/cart" element={<CartPage />} />
@@ -58,5 +45,3 @@ const JewelleryApp = () => {
 };
 
 export default JewelleryApp;
-
-

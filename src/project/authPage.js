@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { auth } from "./ptroutes"; // Import Firebase auth
+import { auth } from "./ptroutes";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 
-const PrivateRoute = () => {
+const AuthRoute = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -18,7 +18,7 @@ const PrivateRoute = () => {
 
   if (loading) return <p>Loading...</p>;
 
-  return user ? <Outlet /> : <Navigate to="/login" replace />;
+  return user ? <Navigate to="/home" replace /> : <Outlet />;
 };
 
-export default PrivateRoute;
+export default AuthRoute;

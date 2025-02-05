@@ -197,15 +197,17 @@
 // };
 
 // export default WishlistPage;
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { FaShoppingCart, FaHeart, FaUser, FaBars, FaGem } from "react-icons/fa";
 import "./Whishlist.css";
 
 const WishlistPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [wishlist, setWishlist] = React.useState(location.state?.wishlist || []);
+  const [wishlist, setWishlist] = useState(location.state?.wishlist || []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Your Wishlist";
@@ -216,36 +218,77 @@ const WishlistPage = () => {
   };
 
   return (
-    <div className="wishlist-container">
-      <div className="wishlist-card">
-        <div className="wishlist-header">
-          <h2>Your Wishlist</h2>
-        </div>
+    <div>
+      {/* Navbar */}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm px-4 py-3">
+        <span className="navbar-brand fw-bold fs-4">
+          <FaGem className="me-2" /> Bhavii Jeweller's
+        </span>
 
-        <div className="wishlist-body">
-          {wishlist.length === 0 ? (
-            <div className="empty-wishlist-container">
-              <img src="https://chapenter.com/images/empty.gif" alt="Empty Wishlist" className="empty-wishlist-img" />
-              <p className="empty-wishlist-message">Your wishlist is empty! Start adding your favorite products now.</p>
-              <button className="wishlist-continue-btn" onClick={() => navigate("/home")}>
-                Continue Shopping
-              </button>
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-expanded={isMenuOpen ? "true" : "false"}
+        >
+          <FaBars className="text-light" />
+        </button>
+
+        <div className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`}>
+          <ul className="navbar-nav ms-auto d-lg-flex align-items-center">
+            <div className="d-flex flex-column flex-lg-row mt-3 mt-lg-0 gap-3">
+              <li className="nav-item">
+                <button className="btn btn-outline-light w-auto px-3 me-3" onClick={() => navigate("/cart")}> 
+                  <FaShoppingCart className="me-2" /> Cart
+                </button>
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-outline-light w-auto px-3 me-3" onClick={() => navigate("/wishlist")}> 
+                  <FaHeart className="me-2" /> Wishlist ({wishlist.length})
+                </button>
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-outline-light w-auto px-3" onClick={() => navigate("/login")}> 
+                  <FaUser className="me-2" /> Logout
+                </button>
+              </li>
             </div>
-          ) : (
-            <ul className="wishlist-list">
-              {wishlist.map((item) => (
-                <li key={item.id} className="wishlist-item">
-                  <div className="wishlist-item-info">
-                    <img src={item.Img_Url} alt={item.Product_Name} className="wishlist-img" />
-                    <span className="wishlist-name">{item.Product_Name}</span>
-                  </div>
-                  <button className="wishlist-remove-btn" onClick={() => removeFromWishlist(item.id)}>
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+          </ul>
+        </div>
+      </nav>
+
+      {/* Wishlist Content */}
+      <div className="wishlist-container">
+        <div className="wishlist-card">
+          <div className="wishlist-header">
+            <h2>Your Wishlist</h2>
+          </div>
+
+          <div className="wishlist-body">
+            {wishlist.length === 0 ? (
+              <div className="empty-wishlist-container">
+                <img src="https://chapenter.com/images/empty.gif" alt="Empty Wishlist" className="empty-wishlist-img" />
+                <p className="empty-wishlist-message">Your wishlist is empty! Start adding your favorite products now.</p>
+                <button className="wishlist-continue-btn" onClick={() => navigate("/home")}>
+                  Continue Shopping
+                </button>
+              </div>
+            ) : (
+              <ul className="wishlist-list">
+                {wishlist.map((item) => (
+                  <li key={item.id} className="wishlist-item">
+                    <div className="wishlist-item-info">
+                      <img src={item.Img_Url} alt={item.Product_Name} className="wishlist-img" />
+                      <span className="wishlist-name">{item.Product_Name}</span>
+                    </div>
+                    <button className="wishlist-remove-btn" onClick={() => removeFromWishlist(item.id)}>
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -253,13 +296,3 @@ const WishlistPage = () => {
 };
 
 export default WishlistPage;
-
-
-
-
-
-
-
-
-
-
