@@ -842,9 +842,6 @@ const JewelleryCards = () => {
                     <div className="card-body">  
                       <h5 className="card-title">{item.Product_Name}</h5>
                       <p className="card-text">
-                        <strong>Price:</strong> ${item.Price.USD}
-                      </p>
-                      <p className="card-text">
                         <strong>Price:</strong> ₹{item.Price.INR}
                       </p>
                       <button className="btn btn-success w-100 mb-2" onClick={() => addToCart(item)}>
@@ -923,29 +920,3 @@ const JewelleryCards = () => {
 };
 
 export default JewelleryCards;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
